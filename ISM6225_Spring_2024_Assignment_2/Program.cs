@@ -62,12 +62,21 @@ namespace Assignment_2
         {
             try
             {
-                // Write your code here
-                return new List<int>(); // Placeholder
+                List<int> missingNumbers = new List<int>(); // Create a list to store missing numbers
+                HashSet<int> numSet = new HashSet<int>(nums);
+                for (int i = 1; i <= nums.Length; i++)   // Loop through numbers from 1 to n and check which are missing
+                {
+                    if (!numSet.Contains(i))
+                    {
+                        missingNumbers.Add(i);
+                    }
+                }
+                return missingNumbers; // Return list of missing numbers
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                Console.WriteLine("Error in FindMissingNumbers: " + ex.Message);
+                throw; // Rethrow the exception after logging it
             }
         }
 
@@ -76,12 +85,27 @@ namespace Assignment_2
         {
             try
             {
-                // Write your code here
-                return new int[0]; // Placeholder
+                int[] result = new int[nums.Length]; // Create result array to store sorted elements
+                int evenIndex = 0;    // Two pointers for even and odd numbers
+                int oddIndex = nums.Length - 1;
+
+                foreach (int num in nums)
+                {
+                    if (num % 2 == 0)
+                    {
+                        result[evenIndex++] = num;
+                    }
+                    else
+                    {
+                        result[oddIndex--] = num;
+                    }
+                }
+                return result;    // Return the array sorted by parity
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                Console.WriteLine("Error in SortArrayByParity: " + ex.Message);
+                throw; // Rethrow the exception after logging it
             }
         }
 
@@ -90,12 +114,22 @@ namespace Assignment_2
         {
             try
             {
-                // Write your code here
-                return new int[0]; // Placeholder
+                Dictionary<int, int> map = new Dictionary<int, int>();  // Create a dictionary to store the number and its index
+                for (int i = 0; i < nums.Length; i++)
+                {
+                    int complement = target - nums[i];   // Find complement
+                    if (map.ContainsKey(complement))
+                    {
+                        return new int[] { map[complement], i };  // If complement exists, return the indices
+                    }
+                    map[nums[i]] = i;   // Otherwise, add the number to the map with its index
+                }
+                return new int[0]; 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                Console.WriteLine("Error in TwoSum: " + ex.Message);
+                throw; // Rethrow the exception
             }
         }
 
@@ -104,12 +138,14 @@ namespace Assignment_2
         {
             try
             {
-                // Write your code here
-                return 0; // Placeholder
+                Array.Sort(nums);  // Sort the array first
+                int n = nums.Length;  // Calculate the maximum product of three numbers
+                return Math.Max(nums[0] * nums[1] * nums[n - 1], nums[n - 1] * nums[n - 2] * nums[n - 3]);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                Console.WriteLine("Error in MaximumProduct: " + ex.Message);
+                throw; // Rethrow the exception 
             }
         }
 
@@ -118,12 +154,19 @@ namespace Assignment_2
         {
             try
             {
-                // Write your code here
-                return "101010"; // Placeholder
+                if (decimalNumber == 0) return "0";  // Handle case for 0
+                string binary = "";   // String to store binary result
+                while (decimalNumber > 0) // Loop to convert decimal to binary
+                {
+                    binary = (decimalNumber % 2) + binary;
+                    decimalNumber /= 2; // Divide by 2
+                }
+                return binary;  // Return binary result
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                Console.WriteLine("Error in DecimalToBinary: " + ex.Message);
+                throw; // Rethrow the exception 
             }
         }
 
@@ -132,12 +175,25 @@ namespace Assignment_2
         {
             try
             {
-                // Write your code here
-                return 0; // Placeholder
+                int left = 0, right = nums.Length - 1;
+                while (left < right)
+                {
+                    int mid = (left + right) / 2;
+                    if (nums[mid] > nums[right])
+                    {
+                        left = mid + 1;  // Search in the right half
+                    }
+                    else
+                    {
+                        right = mid; // Search in the left half
+                    }
+                }
+                return nums[left]; // Return the minimum element
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                Console.WriteLine("Error in FindMin: " + ex.Message);
+                throw; // Rethrow the exception 
             }
         }
 
@@ -146,12 +202,21 @@ namespace Assignment_2
         {
             try
             {
-                // Write your code here
-                return false; // Placeholder
+                if (x < 0) return false; // Negative numbers are not palindromes
+                int original = x, reversed = 0;
+                 while (x != 0)                 // Reverse the number
+
+                {
+                    int pop = x % 10;
+                    x /= 10;
+                    reversed = reversed * 10 + pop;
+                }
+                return original == reversed;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                Console.WriteLine("Error in IsPalindrome: " + ex.Message);
+                throw; // Rethrow the exception 
             }
         }
 
@@ -160,12 +225,20 @@ namespace Assignment_2
         {
             try
             {
-                // Write your code here
-                return 0; // Placeholder
+                if (n <= 1) return n;  // Base cases for Fibonacci
+                int a = 0, b = 1;
+                for (int i = 2; i <= n; i++)   // Loop to calculate the nth Fibonacci number
+                {
+                    int temp = a + b;
+                    a = b;
+                    b = temp;
+                }
+                return b;  // Return the nth Fibonacci number
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                Console.WriteLine("Error in Fibonacci: " + ex.Message);
+                throw; // Rethrow the exception
             }
         }
     }
